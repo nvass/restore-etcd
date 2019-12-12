@@ -105,7 +105,7 @@ for VOLUMEID in $(get_etcd names); do
   ID=$(echo $VOLUMEID | cut -d '|' -f 2)
   HOST=$(echo $VOLUME | cut -d '/' -f 1)
   unset IP
-  while [ -z "$IP ]; do
+  while [ -z "$IP" ]; do
     get_value IP "IP address of ${HOST}"
   done
   get_value PROTO 'https or http' https
