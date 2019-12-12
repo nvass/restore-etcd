@@ -104,7 +104,10 @@ for VOLUMEID in $(get_etcd names); do
   VOLUME=$(echo $VOLUMEID | cut -d '|' -f 1)
   ID=$(echo $VOLUMEID | cut -d '|' -f 2)
   HOST=$(echo $VOLUME | cut -d '/' -f 1)
-  get_value IP "IP address of ${HOST}"
+  unset IP
+  while [ -z "$IP" ]; do
+    get_value IP "IP address of ${HOST}"
+  done
   get_value PROTO 'https or http' https
   get_value ETCD_NAME 'ETCD cluster member name' $(echo m${IP})
   get_value ETCD_CLIENT_PORT 'ETCD client port' '12379'
